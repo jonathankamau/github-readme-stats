@@ -34,6 +34,8 @@
     <a href="https://github.com/anuraghazra/github-readme-stats/issues/new/choose">Solicitar recursos</a>
   </p>
   <p align="center">
+    <a href="/docs/readme_fr.md">Français</a>
+    ·
     <a href="/docs/readme_cn.md">简体中文</a>
     ·
     <a href="/docs/readme_es.md">Español</a>
@@ -44,7 +46,13 @@
     ·
     <a href="/docs/readme_pt-BR.md">Português Brasileiro</a>
     ·
+    <a href="/docs/readme_it.md">Italiano</a>
+    ·
     <a href="/docs/readme_kr.md">한국어</a>
+    .
+    <a href="/docs/readme_nl.md">Nederlands</a>
+    .
+    <a href="/docs/readme_np.md">नेपाली</a>
   </p>
 </p>
 <p align="center">Gostou do projeto? Por favor considere <a href="https://www.paypal.me/anuraghazra">fazer uma doação</a> para ajudar a melhorá-lo!
@@ -54,9 +62,10 @@
 - [Cartão de estatísticas do GitHub](#cartão-de-estatísticas-do-github)
 - [Pins extras do GitHub](#pins-extras-do-github)
 - [Cartão de principais linguagens de programação](#cartão-de-principais-linguagens-de-programação)
+- [Estatística semanal Wakatime](#estatística-semanal-wakatime)
 - [Temas](#temas)
 - [Personalização](#personalização)
-- [Faça suas próprias implantações](#faça-suas-próprias-implantações)
+- [Faça suas próprias implantações](#implante-em-sua-própria-instância-do-vercel)
 
 # Cartão de estatísticas do GitHub
 
@@ -65,10 +74,10 @@ Copie e cole isso no seu conteúdo de remarcação e é isso. Simples!
 Mude o valor de `?username=` para o seu nome de usuário no GitHub.
 
 ```md
-[![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=anuraghazra)](https://github.com/anuraghazra/github-readme-stats)
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra)](https://github.com/anuraghazra/github-readme-stats)
 ```
 
-_Nota: As classificações são baseadas nas estatísticas do usuário, veja [src/calculateRank.js](./src/calculateRank.js)_
+_Nota: As classificações são baseadas nas estatísticas do usuário, veja [src/calculateRank.js](../src/calculateRank.js)_
 
 ### Ocultando estatísticas específicas
 
@@ -77,7 +86,7 @@ Para ocultar estatísticas individualmente, você pode passar um parâmetro de c
 > Opções: `&hide=stars,commits,prs,issues,contribs`
 
 ```md
-![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&hide=contribs,prs)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&hide=contribs,prs)
 ```
 
 ### Adicionando contagem de contribuições privadas à contagem total de commits
@@ -89,7 +98,7 @@ _Nota: Se você estiver implantando este projeto, as contribuições privadas se
 > Opções: `&count_private=true`
 
 ```md
-![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&count_private=true)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&count_private=true)
 ```
 
 ### Exibindo ícones
@@ -97,7 +106,7 @@ _Nota: Se você estiver implantando este projeto, as contribuições privadas se
 Para habilitar ícones, basta utilizar o parâmetro `show_icons=true` na sua requisição, da seguinte forma:
 
 ```md
-![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true)
 ```
 
 ### Temas
@@ -107,7 +116,7 @@ Com temas predefinidos, pode personalizar a aparência dos cartões sem precisar
 Utilize o parâmetro `?theme=THEME_NAME`, da seguinte forma:
 
 ```md
-![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true&theme=radical)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true&theme=radical)
 ```
 
 #### Todos os temas predefinidos :
@@ -116,7 +125,7 @@ dark, radical, merko, gruvbox, tokyonight, onedark, cobalt, synthwave, highcontr
 
 <img src="https://res.cloudinary.com/anuraghazra/image/upload/v1595174536/grs-themes_l4ynja.png" alt="GitHub Readme Stat Themes" width="600px"/>
 
-Visualize [todos o temas disponíveis](./themes/README.md) ou o [arquivo de configuração de tema](./themes/index.js), além de **também poder contribuir com novos temas**, se desejar :D
+Visualize [todos o temas disponíveis](../themes/README.md) ou o [arquivo de configuração de tema](../themes/index.js), além de **também poder contribuir com novos temas**, se desejar :D
 
 ### Personalização
 
@@ -128,8 +137,10 @@ Personalize a aparência do seu `Stats Card` ou `Repo Card` da maneira que desej
 - `text_color` - Cor de texto do conteúdo _(hex color)_
 - `icon_color` - Cor dos ícones (se disponível) _(hex color)_
 - `bg_color` - Cor de fundo do cartão _(hex color)_
-- `theme` - Nome do tema, escolha em [todos os temas disponíveis](./themes/README.md)
+- `hide_border` - Esconde a borda do cartão _(boleano)_
+- `theme` - Nome do tema, escolha em [todos os temas disponíveis](../themes/README.md)
 - `cache_seconds` - Defina o cabeçalho do cache manualmente _(min: 1800, max: 86400)_
+- `locale` - defina o idioma no cartão _(por exemplo. cn, de, es, etc.)_
 
 > Nota sobre o cache: Cartões de repositório tem um cache padrão de 30 minutos (1800 segundos), se o número a contagem de forks e contagem de estrelas é menor que 1 mil o padrão é 2 horas (7200). Note também que o cache é limitado a um mínimo de 30 minutos e um máximo de 24 horas.
 
@@ -154,8 +165,8 @@ Personalize a aparência do seu `Stats Card` ou `Repo Card` da maneira que desej
 - `layout` - Alterna entre os dois layouts disponíveis `default` & `compact`
 - `card_width` - Define a largura do cartão manualmente _(number)_
 
-> :warning: **Importante:**  
-> Nomes de linguagens devem ser uma sequência escapada de URI, como específicado em [Codificação por cento](https://pt.wikipedia.org/wiki/Codificação_por_cento)  
+> :warning: **Importante:**
+> Nomes de linguagens devem ser uma sequência escapada de URI, como específicado em [Codificação por cento](https://pt.wikipedia.org/wiki/Codificação_por_cento)
 > (Isso é: `c++` deve se tornar `c%2B%2B`, `jupyter notebook` deve se tornar `jupyter%20notebook`, etc.)
 
 ---
@@ -173,16 +184,16 @@ Copie e cole esse código no seu README.md e altere os atributos.
 Endpoint: `api/pin?username=anuraghazra&repo=github-readme-stats`
 
 ```md
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats)](https://github.com/anuraghazra/github-readme-stats)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats)](https://github.com/anuraghazra/github-readme-stats)
 ```
 
 ### Demonstração
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats)](https://github.com/anuraghazra/github-readme-stats)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats)](https://github.com/anuraghazra/github-readme-stats)
 
 Utilize a variável [show_owner](#personalização) para incluir o nome de usuário do proprietária do repositório
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats&show_owner=true)](https://github.com/anuraghazra/github-readme-stats)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats&show_owner=true)](https://github.com/anuraghazra/github-readme-stats)
 
 # Cartão de principais linguagens de programação
 
@@ -224,35 +235,51 @@ Utilize a opção `&layout=compact` para mudar o layout do cartão.
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=anuraghazra&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 
+# Estatística semanal Wakatime
+
+Altere o valor de `?username=` para o seu username do Wakatime.
+
+```md
+[![willianrod's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=willianrod)](https://github.com/anuraghazra/github-readme-stats)
+```
+
+### Demonstração
+
+[![willianrod's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=willianrod)](https://github.com/anuraghazra/github-readme-stats)
+
+[![willianrod's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=willianrod&hide_progress=true)](https://github.com/anuraghazra/github-readme-stats)
+
 ---
+
+
 
 ### Todas as demonstrações
 
 - Padronizado
 
-![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=anuraghazra)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra)
 
 - Ocultando estatísticas específicas
 
-![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&hide=contribs,issues)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&hide=contribs,issues)
 
 - Mostrando ícones
 
-![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&hide=issues&show_icons=true)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&hide=issues&show_icons=true)
 
 - Incluir todos os commits
 
-![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&include_all_commits=true)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&include_all_commits=true)
 
 - Temas
 
 Escolha entre um dos [temas predefinidos](#temas)
 
-![Anurag's github stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true&theme=radical)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true&theme=radical)
 
 - Personalizando o cartão de estatísticas
 
-![Anurag's github stats](https://github-readme-stats.vercel.app/api/?username=anuraghazra&show_icons=true&title_color=fff&icon_color=79ff97&text_color=9f9f9f&bg_color=151515)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api/?username=anuraghazra&show_icons=true&title_color=fff&icon_color=79ff97&text_color=9f9f9f&bg_color=151515)
 
 - Customizando o cartão de repositório
 
@@ -270,14 +297,16 @@ Por padrão, você não poderá organizar as imagens lado a lado. Para fazer iss
 
 ```md
 <a href="https://github.com/anuraghazra/github-readme-stats">
-  <img align="left" src="https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats" />
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats" />
 </a>
 <a href="https://github.com/anuraghazra/convoychat">
-  <img align="left" src="https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=convoychat" />
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=convoychat" />
 </a>
 ```
 
 ## Implante em sua própria instância do Vercel
+
+#### [Check Out Step By Step Video Tutorial By @codeSTACKr](https://youtu.be/n6d4KHSKqGk?t=107)
 
 Como a API do GitHub permite apenas 5 mil solicitações por hora, é possível que minha `https://github-readme-stats.vercel.app/api` atinja a cota limite. Se hospedar em seu próprio servidor Vercel, não precisará se preocupar com nada. Clique no botão de implantação para começar!
 
@@ -289,16 +318,16 @@ Nota: Desde [#58](https://github.com/anuraghazra/github-readme-stats/pull/58) h�
  <summary>Guia de configuração do Vercel</summary>
 
 1. Acesse [vercel.com](https://vercel.com/)
-1. Clique em `Login`  
+1. Clique em `Login`
    ![](https://files.catbox.moe/tct1wg.png)
-1. Acesse com o GitHub clicando em `Continue with GitHub`  
+1. Acesse com o GitHub clicando em `Continue with GitHub`
    ![](https://files.catbox.moe/btd78j.jpeg)
 1. Entre no GitHub e permita acesso a todos os repositórios, se solicitado
 1. Faça Fork neste repositório
 1. Volte ao seu [painel principal do Vercel](https://vercel.com/dashboard)
-1. Selecione `Import Project`  
+1. Selecione `Import Project`
    ![](https://files.catbox.moe/qckos0.png)
-1. Selecione `Import Git Repository`  
+1. Selecione `Import Git Repository`
    ![](https://files.catbox.moe/pqub9q.png)
 1. Selecione a raiz e mantenha tudo como está, basta adicionar sua variável de ambiente chamada PAT_1 (que será exibida), que conterá um token de acesso pessoal (PAT), que você pode criar facilmente [aqui](https://github.com/settings/tokens/new) (deixe tudo como está, apenas dê um nome, que pode ser o que você quiser)
    ![](https://files.catbox.moe/0ez4g7.png)
@@ -320,6 +349,8 @@ No entanto, se você utilizar este projeto e estiver satisfeito com ele, ou apen
 Obrigado! :heart:
 
 ---
+
+[![https://vercel.com?utm_source=github_readme_stats_team&utm_campaign=oss](../powered-by-vercel.svg)](https://vercel.com?utm_source=github_readme_stats_team&utm_campaign=oss)
 
 Contribuições são bem-vindas! <3
 
