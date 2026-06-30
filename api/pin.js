@@ -1,17 +1,28 @@
-require("dotenv").config();
-const {
-  renderError,
-  parseBoolean,
-  clampValue,
-  CONSTANTS,
-} = require("../src/common/utils");
-const fetchRepo = require("../src/fetchers/repo-fetcher");
-const renderRepoCard = require("../src/cards/repo-card");
+// @ts-check
 
-module.exports = async (req, res) => {
+import { renderRepoCard } from "../src/cards/repo.js";
+import { guardAccess } from "../src/common/access.js";
+import {
+  CACHE_TTL,
+  resolveCacheSeconds,
+  setCacheHeaders,
+  setErrorCacheHeaders,
+} from "../src/common/cache.js";
+import {
+  MissingParamError,
+  retrieveSecondaryMessage,
+} from "../src/common/error.js";
+import { parseBoolean } from "../src/common/ops.js";
+import { renderError } from "../src/common/render.js";
+import { fetchRepo } from "../src/fetchers/repo.js";
+import { isLocaleAvailable } from "../src/translations.js";
+
+// @ts-ignore
+export default async (req, res) => {
   const {
     username,
     repo,
+    hide_border,
     title_color,
     icon_color,
     text_color,
@@ -19,47 +30,101 @@ module.exports = async (req, res) => {
     theme,
     show_owner,
     cache_seconds,
+    locale,
+    border_radius,
+    border_color,
+    description_lines_count,
   } = req.query;
-
-  let repoData;
 
   res.setHeader("Content-Type", "image/svg+xml");
 
-  try {
-    repoData = await fetchRepo(username, repo);
-  } catch (err) {
-    return res.send(renderError(err.message, err.secondaryMessage));
-  }
-
-  let cacheSeconds = clampValue(
-    parseInt(cache_seconds || CONSTANTS.THIRTY_MINUTES, 10),
-    CONSTANTS.THIRTY_MINUTES,
-    CONSTANTS.ONE_DAY
-  );
-
-  /*
-    if star count & fork count is over 1k then we are kFormating the text
-    and if both are zero we are not showing the stats
-    so we can just make the cache longer, since there is no need to frequent updates
-  */
-  const stars = repoData.stargazers.totalCount;
-  const forks = repoData.forkCount;
-  const isBothOver1K = stars > 1000 && forks > 1000;
-  const isBothUnder1 = stars < 1 && forks < 1;
-  if (!cache_seconds && (isBothOver1K || isBothUnder1)) {
-    cacheSeconds = CONSTANTS.TWO_HOURS;
-  }
-
-  res.setHeader("Cache-Control", `public, max-age=${cacheSeconds}`);
-
-  res.send(
-    renderRepoCard(repoData, {
+  const access = guardAccess({
+    res,
+    id: username,
+    type: "username",
+    colors: {
       title_color,
-      icon_color,
       text_color,
       bg_color,
+      border_color,
       theme,
-      show_owner: parseBoolean(show_owner),
-    })
-  );
+    },
+  });
+  if (!access.isPassed) {
+    return access.result;
+  }
+
+  if (locale && !isLocaleAvailable(locale)) {
+    return res.send(
+      renderError({
+        message: "Something went wrong",
+        secondaryMessage: "Language not found",
+        renderOptions: {
+          title_color,
+          text_color,
+          bg_color,
+          border_color,
+          theme,
+        },
+      }),
+    );
+  }
+
+  try {
+    const repoData = await fetchRepo(username, repo);
+    const cacheSeconds = resolveCacheSeconds({
+      requested: parseInt(cache_seconds, 10),
+      def: CACHE_TTL.PIN_CARD.DEFAULT,
+      min: CACHE_TTL.PIN_CARD.MIN,
+      max: CACHE_TTL.PIN_CARD.MAX,
+    });
+
+    setCacheHeaders(res, cacheSeconds);
+
+    return res.send(
+      renderRepoCard(repoData, {
+        hide_border: parseBoolean(hide_border),
+        title_color,
+        icon_color,
+        text_color,
+        bg_color,
+        theme,
+        border_radius,
+        border_color,
+        show_owner: parseBoolean(show_owner),
+        locale: locale ? locale.toLowerCase() : null,
+        description_lines_count,
+      }),
+    );
+  } catch (err) {
+    setErrorCacheHeaders(res);
+    if (err instanceof Error) {
+      return res.send(
+        renderError({
+          message: err.message,
+          secondaryMessage: retrieveSecondaryMessage(err),
+          renderOptions: {
+            title_color,
+            text_color,
+            bg_color,
+            border_color,
+            theme,
+            show_repo_link: !(err instanceof MissingParamError),
+          },
+        }),
+      );
+    }
+    return res.send(
+      renderError({
+        message: "An unknown error occurred",
+        renderOptions: {
+          title_color,
+          text_color,
+          bg_color,
+          border_color,
+          theme,
+        },
+      }),
+    );
+  }
 };
